@@ -1,0 +1,39 @@
+.content {
+  display: grid;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1080px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td,
+th {
+  width: 25%;
+}
+
+.btn-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  width: 78%;
+  max-width: 1080px;
+}
+
+.btn-add-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-add-search .input-search {
+  margin-left: 50px;
+}

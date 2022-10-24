@@ -1,0 +1,62 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "json-server",
+      "email": "teste_12@ooutlok.com",
+      "online": true,
+      "price": 320.89,
+      "dataCriacao": "04/10/2022"
+    },
+    {
+      "id": 2,
+      "name": "json-server",
+      "email": "teste_12@ooutlok.com",
+      "online": true,
+      "price": 320.89,
+      "dataCriacao": "17/10/2022"
+    },
+    {
+      "name": "teste",
+      "email": "teste_12@hotmail.com",
+      "online": "sim",
+      "price": 5000,
+      "dataCriacao": "1996-10-04",
+      "id": 3
+    },
+    {
+      "name": "Angular",
+      "email": "angular_teste@hotmail.com",
+      "online": "nao",
+      "price": 10000,
+      "dataCriacao": "2022-10-06",
+      "id": 4
+    },
+    {
+      "name": "Java",
+      "email": "java_teste@hotmail.com",
+      "online": "nao",
+      "price": 700,
+      "dataCriacao": "2022-12-22",
+      "id": 5
+    },
+    {
+      "name": "Angularjs",
+      "email": "angularjs-test@hotmail.com",
+      "online": "sim",
+      "price": 12,
+      "dataCriacao": "2022-07-28",
+      "id": 6
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
