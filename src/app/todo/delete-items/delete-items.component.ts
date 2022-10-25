@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Items, TodoService } from '../todo.service';
 
@@ -9,6 +9,7 @@ import { Items, TodoService } from '../todo.service';
 })
 export class DeleteItemsComponent implements OnInit {
   items: Items[] = [];
+  @Output() deleted = new EventEmitter<Items>();
 
   constructor(private todoService: TodoService) {}
 
@@ -21,5 +22,9 @@ export class DeleteItemsComponent implements OnInit {
       next: () => alert('produto deletado!'),
       error: () => alert('erro ao deletar produto'),
     });
+  }
+
+  test(): void {
+    alert('it works');
   }
 }

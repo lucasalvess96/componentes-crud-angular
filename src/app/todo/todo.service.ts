@@ -52,7 +52,7 @@ export class TodoService {
       .pipe(catchError(this.configErroApi));
   }
 
-  private configErroApi(erro: HttpErrorResponse) {
+  private configErroApi(erro: HttpErrorResponse): Observable<never> {
     if (erro.status === 0) {
       console.log(`Um erro ocorreu na requisição ${erro.error}`);
     } else {

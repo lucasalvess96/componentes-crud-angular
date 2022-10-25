@@ -12,7 +12,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class CreateFormItemsComponent implements OnInit {
   formRegister!: FormGroup;
-  // dataForm: Items[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,16 +60,6 @@ export class CreateFormItemsComponent implements OnInit {
       dataCriacao: ['', [Validators.required]],
     });
   }
-
-  // onAddItems(): void {
-  //   if (this.formRegister.valid) {
-  //     this.dataForm = this.formRegister.value;
-
-  //     console.table(this.dataForm);
-
-  //     alert('success!');
-  //   }
-  // }
 
   registerUser(): void {
     if (this.formRegister.valid) {

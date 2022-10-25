@@ -1,30 +1,6 @@
 {
   "items": [
     {
-      "id": 1,
-      "name": "json-server",
-      "email": "teste_12@ooutlok.com",
-      "online": true,
-      "price": 320.89,
-      "dataCriacao": "04/10/2022"
-    },
-    {
-      "id": 2,
-      "name": "json-server",
-      "email": "teste_12@ooutlok.com",
-      "online": true,
-      "price": 320.89,
-      "dataCriacao": "17/10/2022"
-    },
-    {
-      "name": "teste",
-      "email": "teste_12@hotmail.com",
-      "online": "sim",
-      "price": 5000,
-      "dataCriacao": "1996-10-04",
-      "id": 3
-    },
-    {
       "name": "Angular",
       "email": "angular_teste@hotmail.com",
       "online": "nao",
@@ -47,6 +23,22 @@
       "price": 12,
       "dataCriacao": "2022-07-28",
       "id": 6
+    },
+    {
+      "name": "PHP",
+      "email": "php_5@hotmail.com",
+      "online": "nao",
+      "price": 10,
+      "dataCriacao": "2022-10-29",
+      "id": 7
+    },
+    {
+      "name": "javascript",
+      "email": "j.script@hotmail.com",
+      "online": "sim",
+      "price": 500,
+      "dataCriacao": "2022-11-01",
+      "id": 8
     }
   ],
   "comments": [

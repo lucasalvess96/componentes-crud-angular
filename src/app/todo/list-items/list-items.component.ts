@@ -39,6 +39,26 @@ export class ListItemsComponent implements OnInit {
     });
   }
 
+  onDeleteItems(item: Items): void {
+    this.items = this.items.filter(i => i !== item);
+
+    this.todoService.deleteItems(item.id).subscribe({
+      next: () => {
+        alert('produto deletado!'),
+        this.onListItems();
+      },
+      error: () => alert('erro ao deletar produto'),
+    });
+    // this.todoService.deleteItems(id)
+    //   .subscribe({
+    //     next: () => {
+    //       alert('produto deletado!'),
+    //       this.onListItems();
+    //     },
+    //     error: () => alert('erro ao deletar produto'),
+    //   })
+  }
+
   openDialog() {
     this.dialog.open(UpdateItemsComponent, {
       data: {
