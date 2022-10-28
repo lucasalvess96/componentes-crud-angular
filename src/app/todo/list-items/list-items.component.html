@@ -14,13 +14,21 @@
 
 <div class="content">
   <div class="btn-add-search">
-    <app-create-items></app-create-items>
+    <button
+      mat-icon-button
+      class="example-icon"
+      color="primary"
+      (click)="onCreateItem()">
+      <mat-icon>add</mat-icon>
+      <span>novo</span>
+    </button>
     <mat-form-field appearance="standard" class="input-search">
       <mat-label>Buscar</mat-label>
       <input
         matInput
         (keyup)="applyFilter($event)"
-        placeholder="Ex. lucas"
+        placeholder="Ex. pesquise um item"
+        autocomplete="off"
         #input />
     </mat-form-field>
   </div>
@@ -55,10 +63,10 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Ações</th>
         <td mat-cell *matCellDef="let row" class="btn-flex">
-          <button mat-icon-button color="primary">
+          <button mat-icon-button color="primary" (click)="onUpdateItem(row)">
             <mat-icon>editar</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="onDeleteItems(row.id)">
+          <button mat-icon-button color="warn" (click)="onDeleteItems(row)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

@@ -44,12 +44,21 @@ export class TodoService {
       .pipe(catchError(this.configErroApi));
   }
 
-  deleteItems(id: number): Observable<unknown> {
-    const url: string = `${this.baseURL}/${id}`;
+  updateItem(item: Items): Observable<Items> {
+    httpOptions.headers = httpOptions.headers.set(
+      'Authorization',
+      'my-auth-token'
+    );
 
     return this.http
-      .delete(url, httpOptions)
+      .put<Items>(this.baseURL + item.id, item, httpOptions)
       .pipe(catchError(this.configErroApi));
+  }
+
+  deleteItems(item: Items): Observable<unknown> {
+    const url: string = `${this.baseURL}/${item.id}`;
+
+    return this.http.delete(url).pipe(catchError(this.configErroApi));
   }
 
   private configErroApi(erro: HttpErrorResponse): Observable<never> {

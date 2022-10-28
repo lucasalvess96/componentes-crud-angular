@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UpdateItemsComponent } from '../update-items/update-items.component';
+import { CreateItemsComponent } from '../create-items/create-items.component';
 import { TodoService, Items } from '../todo.service';
 
 import { MatPaginator } from '@angular/material/paginator';
@@ -39,31 +40,41 @@ export class ListItemsComponent implements OnInit {
     });
   }
 
-  onDeleteItems(item: Items): void {
-    this.items = this.items.filter(i => i !== item);
-
-    this.todoService.deleteItems(item.id).subscribe({
-      next: () => {
-        alert('produto deletado!'),
-        this.onListItems();
-      },
-      error: () => alert('erro ao deletar produto'),
-    });
-    // this.todoService.deleteItems(id)
-    //   .subscribe({
-    //     next: () => {
-    //       alert('produto deletado!'),
-    //       this.onListItems();
-    //     },
-    //     error: () => alert('erro ao deletar produto'),
-    //   })
+  onCreateItem(): void {
+    this.dialog
+      .open(CreateItemsComponent, {
+        width: '35%',
+      })
+      .afterClosed()
+      .subscribe((val: string) => {
+        if (val === 'salvo') {
+          this.onListItems();
+        }
+      });
   }
 
-  openDialog() {
-    this.dialog.open(UpdateItemsComponent, {
-      data: {
-        width: '30%',
+  onUpdateItem(item: Items): void {
+    this.dialog
+      .open(CreateItemsComponent, {
+        width: '35%',
+        data: item,
+      })
+      .afterClosed()
+      .subscribe((val: string) => {
+        if (val === 'update') {
+          this.onListItems();
+        }
+      });
+  }
+
+  onDeleteItems(item: Items): void {
+    this.items = this.items.filter((id: Items) => id !== item);
+
+    this.todoService.deleteItems(item).subscribe({
+      next: () => {
+        alert('produto deletado'), this.onListItems();
       },
+      error: () => alert('erro ao deleter usuário'),
     });
   }
 

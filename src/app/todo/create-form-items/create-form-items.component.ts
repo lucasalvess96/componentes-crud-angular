@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Items, TodoService } from '../todo.service';
+import { TodoService, Items } from '../todo.service';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -12,12 +11,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class CreateFormItemsComponent implements OnInit {
   formRegister!: FormGroup;
+  actionBTN: string = 'adicionar';
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private todoService: TodoService,
-    private matDialogRef: MatDialogRef<CreateFormItemsComponent>
+    private matDialogRef: MatDialogRef<CreateFormItemsComponent>,
+    @Inject(MAT_DIALOG_DATA) private editItem: Items
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +59,15 @@ export class CreateFormItemsComponent implements OnInit {
       ],
       dataCriacao: ['', [Validators.required]],
     });
+
+    if (this.editItem) {
+      this.actionBTN = 'alterar';
+
+      this.formRegister.controls['name'].setValue(this.editItem.name);
+      this.formRegister.controls['email'].setValue(this.editItem.email);
+      this.formRegister.controls['online'].setValue(this.editItem.online);
+      this.formRegister.controls['price'].setValue(this.editItem.price);
+    }
   }
 
   registerUser(): void {

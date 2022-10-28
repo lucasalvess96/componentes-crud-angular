@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ListItemsComponent } from './list-items/list-items.component';
 import { CreateItemsComponent } from './create-items/create-items.component';
 import { DetailItemsComponent } from './detail-items/detail-items.component';
-import { DeleteItemsComponent } from './delete-items/delete-items.component';
 import { UpdateItemsComponent } from './update-items/update-items.component';
 
 import { MaterialModule } from '../material-angular/material/material.module';
@@ -19,17 +18,16 @@ import { CreateFormItemsComponent } from './create-form-items/create-form-items.
     ListItemsComponent,
     CreateItemsComponent,
     DetailItemsComponent,
-    DeleteItemsComponent,
     UpdateItemsComponent,
     NotFoundComponent,
-    CreateFormItemsComponent
+    CreateFormItemsComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
-    TodoRoutingModule
+    TodoRoutingModule,
   ],
 })
 export class TodoModule {}

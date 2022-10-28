@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ListItemsComponent } from '../list-items/list-items.component';
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TodoService, Items } from '../todo.service';
 
-import { MatDialog } from '@angular/material/dialog';
-import { CreateFormItemsComponent } from '../create-form-items/create-form-items.component';
-
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-items',
@@ -11,20 +10,105 @@ import { CreateFormItemsComponent } from '../create-form-items/create-form-items
   styleUrls: ['./create-items.component.css'],
 })
 export class CreateItemsComponent implements OnInit {
-  constructor(private dialog: MatDialog, private listItemsComponent: ListItemsComponent) {}
+  formRegister!: FormGroup;
+  actionBTN: string = 'adicionar';
 
-  ngOnInit(): void {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private todoService: TodoService,
+    private matDialogRef: MatDialogRef<CreateItemsComponent>,
+    @Inject(MAT_DIALOG_DATA) private editItem: Items
+  ) {}
 
-  openDialog(): void {
-    this.dialog
-      .open(CreateFormItemsComponent, {
-        width: '30%',
-      })
-      .afterClosed()
-      .subscribe((val: string) => {
-        if (val === 'salvo') {
-          this.listItemsComponent.onListItems();
-        }
-      });
+  ngOnInit(): void {
+    this.formRegister = this.formBuilder.group({
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^([A-Za-z]+[A-Za-z ])*$'),
+          Validators.maxLength(40),
+          Validators.minLength(3),
+        ],
+      ],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+        ],
+      ],
+      online: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^([A-Za-z]+[A-Za-z ])*$'),
+          Validators.pattern(/(sim|nao)/g),
+          Validators.minLength(3),
+          Validators.maxLength(3),
+        ],
+      ],
+      price: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]\d*$/),
+          Validators.minLength(1),
+        ],
+      ],
+      dataCriacao: ['', [Validators.required]],
+    });
+
+    // console.log(this.editItem);
+
+    if (this.editItem) {
+      this.actionBTN = 'alterar';
+
+      this.formRegister.controls['name'].setValue(this.editItem.name);
+      this.formRegister.controls['email'].setValue(this.editItem.email);
+      this.formRegister.controls['online'].setValue(this.editItem.online);
+      this.formRegister.controls['price'].setValue(this.editItem.price);
+    }
+  }
+
+  registerUser(): void {
+    if (!this.editItem) {
+      if (this.formRegister.valid) {
+        this.todoService.addItems(this.formRegister.value).subscribe({
+          next: () => {
+            alert('produto adicionado!');
+            this.formRegister.reset();
+            this.matDialogRef.close('salvo');
+          },
+          error: () => alert('erro ao adicionar produto.'),
+        });
+      }
+    } else {
+      this.updateUser();
+    }
+  }
+
+  updateUser() {
+    this.todoService.updateItem(this.formRegister.value).subscribe({
+      next: () => {
+        alert('produto atualizado com sucesso');
+        this.formRegister.reset();
+        this.matDialogRef.close('atualizado');
+      },
+      error: () => alert('erro ao atualizar produto'),
+    });
+  }
+
+  get handleName() {
+    return this.formRegister.get('name')!;
+  }
+
+  get handleOnline() {
+    return this.formRegister.get('online')!;
+  }
+
+  get handleEmail() {
+    return this.formRegister.get('email')!;
   }
 }

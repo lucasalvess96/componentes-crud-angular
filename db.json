@@ -17,14 +17,6 @@
       "id": 5
     },
     {
-      "name": "Angularjs",
-      "email": "angularjs-test@hotmail.com",
-      "online": "sim",
-      "price": 12,
-      "dataCriacao": "2022-07-28",
-      "id": 6
-    },
-    {
       "name": "PHP",
       "email": "php_5@hotmail.com",
       "online": "nao",
