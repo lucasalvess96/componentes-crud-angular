@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UpdateItemsComponent } from '../update-items/update-items.component';
 import { CreateItemsComponent } from '../create-items/create-items.component';
 import { TodoService, Items } from '../todo.service';
 
@@ -60,7 +59,7 @@ export class ListItemsComponent implements OnInit {
         data: item,
       })
       .afterClosed()
-      .subscribe((val: string) => {
+      .subscribe(val => {
         if (val === 'update') {
           this.onListItems();
         }

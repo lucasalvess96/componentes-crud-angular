@@ -51,7 +51,7 @@ export class TodoService {
     );
 
     return this.http
-      .put<Items>(this.baseURL + item.id, item, httpOptions)
+      .put<Items>(`${this.baseURL}/${item.id}`, item, httpOptions)
       .pipe(catchError(this.configErroApi));
   }
 

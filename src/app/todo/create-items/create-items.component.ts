@@ -17,7 +17,7 @@ export class CreateItemsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private todoService: TodoService,
     private matDialogRef: MatDialogRef<CreateItemsComponent>,
-    @Inject(MAT_DIALOG_DATA) private editItem: Items
+    @Inject(MAT_DIALOG_DATA) private editItem: Items | undefined
   ) {}
 
   ngOnInit(): void {
@@ -65,10 +65,13 @@ export class CreateItemsComponent implements OnInit {
     if (this.editItem) {
       this.actionBTN = 'alterar';
 
-      this.formRegister.controls['name'].setValue(this.editItem.name);
-      this.formRegister.controls['email'].setValue(this.editItem.email);
-      this.formRegister.controls['online'].setValue(this.editItem.online);
-      this.formRegister.controls['price'].setValue(this.editItem.price);
+      this.formRegister.get('name')?.patchValue(this.editItem.name);
+      this.formRegister.get('email')?.patchValue(this.editItem.email);
+      this.formRegister.get('online')?.patchValue(this.editItem.online);
+      this.formRegister.get('price')?.patchValue(this.editItem.price);
+      this.formRegister
+        .get('dataCriacao')
+        ?.patchValue(this.editItem.dataCriacao);
     }
   }
 
@@ -89,12 +92,22 @@ export class CreateItemsComponent implements OnInit {
     }
   }
 
-  updateUser() {
-    this.todoService.updateItem(this.formRegister.value).subscribe({
+  updateUser(): void {
+    const editUser = this.formRegister?.value;
+
+    editUser.id = this.editItem?.id;
+    editUser.name = this.editItem?.name;
+    editUser.email = this.editItem?.email;
+    editUser.online = this.editItem?.online;
+    editUser.price = this.editItem?.price;
+    editUser.dataCriacao = this.editItem?.dataCriacao;
+
+    this.todoService.updateItem(editUser).subscribe({
       next: () => {
         alert('produto atualizado com sucesso');
         this.formRegister.reset();
-        this.matDialogRef.close('atualizado');
+        this.matDialogRef.close('update');
+        console.log(editUser);
       },
       error: () => alert('erro ao atualizar produto'),
     });
