@@ -69,12 +69,14 @@ export class ListItemsComponent implements OnInit {
   onDeleteItems(item: Items): void {
     this.items = this.items.filter((id: Items) => id !== item);
 
-    this.todoService.deleteItems(item).subscribe({
-      next: () => {
-        alert('produto deletado'), this.onListItems();
-      },
-      error: () => alert('erro ao deleter usuário'),
-    });
+    if (confirm('are you sure ?')) {
+      this.todoService.deleteItems(item).subscribe({
+        next: () => {
+          alert('produto deletado'), this.onListItems();
+        },
+        error: () => alert('erro ao deleter usuário'),
+      });
+    }
   }
 
   applyFilter(event: Event): void {

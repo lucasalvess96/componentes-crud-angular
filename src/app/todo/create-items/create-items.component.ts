@@ -94,13 +94,7 @@ export class CreateItemsComponent implements OnInit {
 
   updateUser(): void {
     const editUser = this.formRegister?.value;
-
     editUser.id = this.editItem?.id;
-    editUser.name = this.editItem?.name;
-    editUser.email = this.editItem?.email;
-    editUser.online = this.editItem?.online;
-    editUser.price = this.editItem?.price;
-    editUser.dataCriacao = this.editItem?.dataCriacao;
 
     this.todoService.updateItem(editUser).subscribe({
       next: () => {

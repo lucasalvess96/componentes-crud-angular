@@ -13,6 +13,8 @@ import { TodoRoutingModule } from './todo-routing.module';
 import { NotFoundComponent } from '../not-found/not-found.component';
 import { CreateFormItemsComponent } from './create-form-items/create-form-items.component';
 
+import { NgConfirmModule } from 'ng-confirm-box';
+
 @NgModule({
   declarations: [
     ListItemsComponent,
@@ -25,6 +27,7 @@ import { CreateFormItemsComponent } from './create-form-items/create-form-items.
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    NgConfirmModule,
     MaterialModule,
     HttpClientModule,
     TodoRoutingModule,

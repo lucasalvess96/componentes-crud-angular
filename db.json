@@ -1,26 +1,26 @@
 {
   "items": [
     {
-      "name": "Angular",
+      "name": "Angular ",
       "email": "angular_teste@hotmail.com",
-      "online": "nao",
-      "price": 10000,
+      "online": "sim",
+      "price": 57000,
       "dataCriacao": "2022-10-06",
       "id": 4
     },
     {
       "name": "Java",
       "email": "java_teste@hotmail.com",
-      "online": "nao",
-      "price": 700,
+      "online": "sim",
+      "price": 786,
       "dataCriacao": "2022-12-22",
       "id": 5
     },
     {
       "name": "PHP",
-      "email": "php_5@hotmail.com",
+      "email": "php_8@hotmail.com",
       "online": "nao",
-      "price": 10,
+      "price": 100,
       "dataCriacao": "2022-10-29",
       "id": 7
     },
@@ -31,14 +31,6 @@
       "price": 500,
       "dataCriacao": "2022-11-01",
       "id": 8
-    },
-    {
-      "name": "teste",
-      "email": "rdsds@hotmail.com",
-      "online": "sim",
-      "price": 12341,
-      "dataCriacao": "2022-10-26",
-      "id": 9
     }
   ],
   "comments": [

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { TodoModule } from './todo/todo.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-angular/material/material.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { MaterialModule } from './material-angular/material/material.module';
     BrowserAnimationsModule,
     TodoModule,
     AppRoutingModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
