@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { NgConfirmService } from 'ng-confirm-box';
 
 @Component({
   selector: 'app-list-items',
@@ -21,7 +22,11 @@ export class ListItemsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private todoService: TodoService, private dialog: MatDialog) {}
+  constructor(
+    private todoService: TodoService,
+    private dialog: MatDialog,
+    private confirmService: NgConfirmService
+  ) {}
 
   ngOnInit(): void {
     this.onListItems();
@@ -69,14 +74,18 @@ export class ListItemsComponent implements OnInit {
   onDeleteItems(item: Items): void {
     this.items = this.items.filter((id: Items) => id !== item);
 
-    if (confirm('are you sure ?')) {
-      this.todoService.deleteItems(item).subscribe({
-        next: () => {
-          alert('produto deletado'), this.onListItems();
-        },
-        error: () => alert('erro ao deleter usuário'),
-      });
-    }
+    this.confirmService.showConfirm(
+      'Deseja confirmar exlusão ?',
+      () => {
+        this.todoService.deleteItems(item).subscribe({
+          next: () => {
+            alert('produto deletado'), this.onListItems();
+          },
+          error: () => alert('erro ao deleter usuário'),
+        });
+      },
+      () => {}
+    );
   }
 
   applyFilter(event: Event): void {

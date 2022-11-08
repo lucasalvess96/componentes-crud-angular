@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TodoService } from '../todo.service';
 
 import { MatDialogRef } from '@angular/material/dialog';
@@ -11,10 +11,10 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./update-items.component.css'],
 })
 export class UpdateItemsComponent implements OnInit {
-  formRegister!: FormGroup;
+  formRegister!: UntypedFormGroup;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private todoService: TodoService,
     private matDialogRef: MatDialogRef<UpdateItemsComponent>
   ) {}

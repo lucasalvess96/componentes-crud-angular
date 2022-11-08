@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TodoService, Items } from '../todo.service';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -10,11 +10,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./create-form-items.component.css'],
 })
 export class CreateFormItemsComponent implements OnInit {
-  formRegister!: FormGroup;
+  formRegister!: UntypedFormGroup;
   actionBTN: string = 'adicionar';
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private todoService: TodoService,
     private matDialogRef: MatDialogRef<CreateFormItemsComponent>,
     @Inject(MAT_DIALOG_DATA) private editItem: Items
