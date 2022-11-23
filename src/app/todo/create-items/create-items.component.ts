@@ -1,8 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { TodoService, Items } from '../todo.service';
-
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Items, TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-create-items',
@@ -10,11 +9,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./create-items.component.css'],
 })
 export class CreateItemsComponent implements OnInit {
-  formRegister!: UntypedFormGroup;
+  formRegister!: FormGroup;
   actionBTN: string = 'adicionar';
 
   constructor(
-    private formBuilder: UntypedFormBuilder,
+    private formBuilder: FormBuilder,
     private todoService: TodoService,
     private matDialogRef: MatDialogRef<CreateItemsComponent>,
     @Inject(MAT_DIALOG_DATA) private editItem: Items | undefined
@@ -101,7 +100,7 @@ export class CreateItemsComponent implements OnInit {
         alert('produto atualizado com sucesso');
         this.formRegister.reset();
         this.matDialogRef.close('update');
-        console.log(editUser);
+        // console.log(editUser);
       },
       error: () => alert('erro ao atualizar produto'),
     });

@@ -51,7 +51,9 @@
       <!-- Price Column -->
       <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Preço</th>
-        <td mat-cell *matCellDef="let row">{{ row.price | number }}</td>
+        <td mat-cell *matCellDef="let row">
+          {{ row.price | currency: 'BRL':true:'1.2-2' }}
+        </td>
       </ng-container>
 
       <!-- Online Column -->
@@ -65,10 +67,13 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Ações</th>
         <td mat-cell *matCellDef="let row" class="btn-flex">
           <button mat-icon-button color="primary" (click)="onUpdateItem(row)">
-            <mat-icon>editar</mat-icon>
+            <mat-icon title="editar informações">editar</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="onDetailItems(row)">
+            <mat-icon title="ver detalhes do item">contact_page</mat-icon>
           </button>
           <button mat-icon-button color="warn" (click)="onDeleteItems(row)">
-            <mat-icon>delete</mat-icon>
+            <mat-icon title="deletar item">delete</mat-icon>
           </button>
         </td>
       </ng-container>

@@ -1,1 +1,20 @@
-<p>detail-items works!</p>
+<h3>Informações do item {{ data.name }}</h3>
+<hr />
+<div>
+  <p><strong>email: </strong>{{ data.email }}</p>
+  <p><strong>nome: </strong>{{ data.name }}</p>
+  <p><strong>preço: </strong>{{ data.price | currency: 'BRL':true:'1.2-2' }}</p>
+  <p><strong>online: </strong>{{ data.online }}</p>
+  <p>
+    <strong>data de criacao: </strong
+    >{{ data.dataCriacao | date: 'dd/MM/yyyy HH:mm' }}
+  </p>
+
+  <button
+    mat-raised-button
+    color="warn"
+    style="display: flex; margin-left: auto"
+    mat-dialog-close>
+    voltar
+  </button>
+</div>

@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CreateItemsComponent } from '../create-items/create-items.component';
-import { TodoService, Items } from '../todo.service';
-
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
 import { NgConfirmService } from 'ng-confirm-box';
+import { CreateItemsComponent } from '../create-items/create-items.component';
+import { DetailItemsComponent } from '../detail-items/detail-items.component';
+import { Items, TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-list-items',
@@ -34,11 +34,11 @@ export class ListItemsComponent implements OnInit {
 
   onListItems(): void {
     this.todoService.listItems().subscribe({
-      // nex: res => console.log(res),
       next: (res: Items[]) => {
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
+        //console.log(res)
       },
       error: () => alert('erro ao fazer a requisição'),
     });
@@ -71,9 +71,22 @@ export class ListItemsComponent implements OnInit {
       });
   }
 
+  onDetailItems(item: Items): void {
+    this.dialog
+      .open(DetailItemsComponent, {
+        width: '35%',
+        data: item,
+      })
+      .afterClosed()
+      .subscribe(val => {
+        if (val === 'detail') {
+          this.onListItems();
+        }
+      });
+  }
+
   onDeleteItems(item: Items): void {
     this.items = this.items.filter((id: Items) => id !== item);
-
     this.confirmService.showConfirm(
       'Deseja confirmar exlusão ?',
       () => {

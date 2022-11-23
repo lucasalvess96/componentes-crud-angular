@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
-
-import { Observable, throwError, catchError, retry, map } from 'rxjs';
 import {
   HttpClient,
-  HttpParams,
-  HttpHeaders,
   HttpErrorResponse,
+  HttpHeaders,
 } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { catchError, Observable, retry, throwError } from 'rxjs';
 
 export interface Items {
   id: number;
@@ -57,7 +55,6 @@ export class TodoService {
 
   deleteItems(item: Items): Observable<unknown> {
     const url: string = `${this.baseURL}/${item.id}`;
-
     return this.http.delete(url).pipe(catchError(this.configErroApi));
   }
 
