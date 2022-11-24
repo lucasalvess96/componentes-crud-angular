@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgConfirmService } from 'ng-confirm-box';
+import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
+import { ToastrService } from 'ngx-toastr';
 import { Items } from '../../models/items';
 import { TodoService } from '../../service/todo.service';
 import { CreateItemsComponent } from '../create-items/create-items.component';
@@ -26,7 +28,9 @@ export class ListItemsComponent implements OnInit {
   constructor(
     private todoService: TodoService,
     private dialog: MatDialog,
-    private confirmService: NgConfirmService
+    private confirmService: NgConfirmService,
+    private ngxBootstrapConfirmService: NgxBootstrapConfirmService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -93,13 +97,48 @@ export class ListItemsComponent implements OnInit {
       () => {
         this.todoService.deleteItems(item).subscribe({
           next: () => {
-            alert('produto deletado'), this.onListItems();
+            this.alertSuccess(), this.onListItems();
           },
           error: () => alert('erro ao deleter usuário'),
         });
       },
       () => {}
     );
+  }
+
+  onDeleteItemss(item: Items): void {
+    this.items = this.items.filter((id: Items) => id !== item);
+    this.confirmService.showConfirm(
+      'Deseja confirmar exlusão ?',
+      () => {
+        this.todoService.deleteItems(item).subscribe({
+          next: () => {
+            this.alertSuccess(), this.onListItems();
+          },
+          error: () => alert('erro ao deleter usuário'),
+        });
+      },
+      () => {}
+    );
+  }
+
+  action() {
+    let options = {
+      title: 'Confirmar exclusão do usuario ?',
+      confirmLabel: 'Sim',
+      declineLabel: 'Não',
+    };
+    this.ngxBootstrapConfirmService.confirm(options).then((res: boolean) => {
+      if (res) {
+        console.log('Sim');
+      } else {
+        console.log('Não');
+      }
+    });
+  }
+
+  alertSuccess(): void {
+    this.toastr.success('Item deletado com sucesso');
   }
 
   applyFilter(event: Event): void {

@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgConfirmModule } from 'ng-confirm-box';
+import { NgxBootstrapConfirmModule } from 'ngx-bootstrap-confirm';
 import { ToastrModule } from 'ngx-toastr';
 import { NotFoundComponent } from '../page-erro/not-found.component';
 import { MaterialAngularModule } from '../shared/material-angular/material-angular.module';
@@ -27,6 +28,7 @@ import { TodoRoutingModule } from './todo-routing.module';
     MaterialAngularModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    NgxBootstrapConfirmModule,
     TodoRoutingModule,
   ],
 })

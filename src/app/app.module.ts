@@ -14,8 +14,9 @@ import { TodoModule } from './todo/todo.module';
     BrowserAnimationsModule,
     MaterialAngularModule,
     TodoModule,
-    AppRoutingModule,
     FontAwesomeModule,
+
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

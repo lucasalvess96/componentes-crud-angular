@@ -25,6 +25,8 @@
     "@fortawesome/fontawesome-svg-core": "^6.1.0",
     "@fortawesome/free-solid-svg-icons": "^6.1.0",
     "ng-confirm-box": "0.0.6",
+    "ngx-bootstrap": "^9.0.0",
+    "ngx-bootstrap-confirm": "^4.0.3",
     "ngx-mask": "^14.2.3",
     "ngx-toastr": "^16.0.1",
     "rxjs": "~7.5.0",

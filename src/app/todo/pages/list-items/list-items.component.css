@@ -37,3 +37,7 @@ th {
 .btn-add-search .input-search {
   margin-left: 50px;
 }
+
+.modal1[_ngcontent-bce-c304] {
+  background-color: #fff !important;
+}

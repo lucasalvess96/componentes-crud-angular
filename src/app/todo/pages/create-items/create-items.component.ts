@@ -77,8 +77,12 @@ export class CreateItemsComponent implements OnInit {
     }
   }
 
-  alertSuccess() {
-    this.toastr.success('Usuário cadastrado com sucesso');
+  alertSuccess(): void {
+    this.toastr.success('Item cadastrado com sucesso');
+  }
+
+  alertSuccessEdit(): void {
+    this.toastr.success('Item editado com sucesso');
   }
 
   registerUser(): void {
@@ -104,7 +108,7 @@ export class CreateItemsComponent implements OnInit {
 
     this.todoService.updateItem(editUser).subscribe({
       next: () => {
-        alert('produto atualizado com sucesso');
+        this.alertSuccessEdit();
         this.formRegister.reset();
         this.matDialogRef.close('update');
         // console.log(editUser);

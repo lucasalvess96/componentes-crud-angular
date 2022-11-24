@@ -41,3 +41,7 @@ input.example-right-align {
   display: flex;
   width: 200px;
 }
+
+.modal1[_ngcontent-bce-c304] {
+  background-color: #fff !important;
+}
