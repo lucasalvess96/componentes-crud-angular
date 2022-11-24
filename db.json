@@ -4,7 +4,7 @@
       "name": "Angular ",
       "email": "angular_teste@hotmail.com",
       "online": "sim",
-      "price": 57000,
+      "price": 570,
       "dataCriacao": "2022-10-06",
       "id": 4
     },
@@ -31,6 +31,14 @@
       "price": 500,
       "dataCriacao": "2022-11-01",
       "id": 8
+    },
+    {
+      "name": "do checke two",
+      "email": "doce@ooutlok.com.br",
+      "online": "nao",
+      "price": 1052,
+      "dataCriacao": "2022-11-23",
+      "id": 9
     }
   ],
   "comments": [

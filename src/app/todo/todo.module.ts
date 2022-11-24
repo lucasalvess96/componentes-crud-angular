@@ -1,17 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-
-import { ListItemsComponent } from './list-items/list-items.component';
-import { CreateItemsComponent } from './create-items/create-items.component';
-import { DetailItemsComponent } from './detail-items/detail-items.component';
-
-import { MaterialModule } from '../material-angular/material/material.module';
-import { TodoRoutingModule } from './todo-routing.module';
-import { NotFoundComponent } from '../not-found/not-found.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgConfirmModule } from 'ng-confirm-box';
+import { ToastrModule } from 'ngx-toastr';
+import { NotFoundComponent } from '../page-erro/not-found.component';
+import { MaterialAngularModule } from '../shared/material-angular/material-angular.module';
+import { CreateItemsComponent } from './pages/create-items/create-items.component';
+import { DetailItemsComponent } from './pages/detail-items/detail-items.component';
+import { ListItemsComponent } from './pages/list-items/list-items.component';
+import { TodoRoutingModule } from './todo-routing.module';
 
 @NgModule({
   declarations: [
@@ -22,10 +21,12 @@ import { NgConfirmModule } from 'ng-confirm-box';
   ],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     NgConfirmModule,
-    MaterialModule,
+    MaterialAngularModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
     TodoRoutingModule,
   ],
 })

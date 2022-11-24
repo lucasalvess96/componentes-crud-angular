@@ -5,15 +5,8 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, throwError } from 'rxjs';
-
-export interface Items {
-  id: number;
-  email: string;
-  name: string;
-  price: number;
-  online: boolean;
-  dataCriacao: Date;
-}
+import { environment } from 'src/environments/environment';
+import { Items } from '../models/items';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,7 +19,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class TodoService {
-  baseURL: string = 'http://localhost:3000/items';
+  private baseURL: string = `${environment.apiBaseUrl}/items`;
 
   constructor(private http: HttpClient) {}
 

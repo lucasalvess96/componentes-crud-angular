@@ -4,9 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgConfirmService } from 'ng-confirm-box';
+import { Items } from '../../models/items';
+import { TodoService } from '../../service/todo.service';
 import { CreateItemsComponent } from '../create-items/create-items.component';
 import { DetailItemsComponent } from '../detail-items/detail-items.component';
-import { Items, TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-list-items',

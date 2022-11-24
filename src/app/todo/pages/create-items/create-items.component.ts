@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Items, TodoService } from '../todo.service';
+import { ToastrService } from 'ngx-toastr';
+import { Items } from '../../models/items';
+import { TodoService } from '../../service/todo.service';
 
 @Component({
   selector: 'app-create-items',
@@ -16,7 +18,8 @@ export class CreateItemsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private todoService: TodoService,
     private matDialogRef: MatDialogRef<CreateItemsComponent>,
-    @Inject(MAT_DIALOG_DATA) private editItem: Items | undefined
+    @Inject(MAT_DIALOG_DATA) private editItem: Items | undefined,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -74,12 +77,16 @@ export class CreateItemsComponent implements OnInit {
     }
   }
 
+  alertSuccess() {
+    this.toastr.success('Usuário cadastrado com sucesso');
+  }
+
   registerUser(): void {
     if (!this.editItem) {
       if (this.formRegister.valid) {
         this.todoService.addItems(this.formRegister.value).subscribe({
           next: () => {
-            alert('produto adicionado!');
+            this.alertSuccess();
             this.formRegister.reset();
             this.matDialogRef.close('salvo');
           },
