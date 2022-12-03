@@ -4,8 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgConfirmService } from 'ng-confirm-box';
-import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
-import { ToastrService } from 'ngx-toastr';
+import { ComponentsPopupService } from '../../components/components-popup/components-popup.service';
+import { ComponentsAlertsService } from '../../components/messages/messages-alert/components-alerts.service';
 import { Items } from '../../models/items';
 import { TodoService } from '../../service/todo.service';
 import { CreateItemsComponent } from '../create-items/create-items.component';
@@ -26,11 +26,11 @@ export class ListItemsComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private todoService: TodoService,
     private dialog: MatDialog,
+    private todoService: TodoService,
     private confirmService: NgConfirmService,
-    private ngxBootstrapConfirmService: NgxBootstrapConfirmService,
-    private toastr: ToastrService
+    private componentsAlertsService: ComponentsAlertsService,
+    private componentsPopupService: ComponentsPopupService
   ) {}
 
   ngOnInit(): void {
@@ -45,10 +45,11 @@ export class ListItemsComponent implements OnInit {
         this.dataSource.sort = this.sort;
         //console.log(res)
       },
-      error: () => alert('erro ao fazer a requisição'),
+      error: () => this.componentsAlertsService.alertErrorRequest(),
     });
   }
 
+  // https://www.youtube.com/watch?v=3tD6fKdxom0 -> pop delet
   onCreateItem(): void {
     this.dialog
       .open(CreateItemsComponent, {
@@ -97,48 +98,14 @@ export class ListItemsComponent implements OnInit {
       () => {
         this.todoService.deleteItems(item).subscribe({
           next: () => {
-            this.alertSuccess(), this.onListItems();
+            this.componentsAlertsService.alertSuccess();
+            this.onListItems();
           },
-          error: () => alert('erro ao deleter usuário'),
+          error: () => this.componentsAlertsService.alertErrorDeleteUser(),
         });
       },
       () => {}
     );
-  }
-
-  onDeleteItemss(item: Items): void {
-    this.items = this.items.filter((id: Items) => id !== item);
-    this.confirmService.showConfirm(
-      'Deseja confirmar exlusão ?',
-      () => {
-        this.todoService.deleteItems(item).subscribe({
-          next: () => {
-            this.alertSuccess(), this.onListItems();
-          },
-          error: () => alert('erro ao deleter usuário'),
-        });
-      },
-      () => {}
-    );
-  }
-
-  action() {
-    let options = {
-      title: 'Confirmar exclusão do usuario ?',
-      confirmLabel: 'Sim',
-      declineLabel: 'Não',
-    };
-    this.ngxBootstrapConfirmService.confirm(options).then((res: boolean) => {
-      if (res) {
-        console.log('Sim');
-      } else {
-        console.log('Não');
-      }
-    });
-  }
-
-  alertSuccess(): void {
-    this.toastr.success('Item deletado com sucesso');
   }
 
   applyFilter(event: Event): void {

@@ -81,8 +81,16 @@ export class CreateItemsComponent implements OnInit {
     this.toastr.success('Item cadastrado com sucesso');
   }
 
+  alertErrorCreate(): void {
+    this.toastr.error('Error ao criar um item');
+  }
+
   alertSuccessEdit(): void {
     this.toastr.success('Item editado com sucesso');
+  }
+
+  alertRemoveEdit(): void {
+    this.toastr.error('Error ao editado item');
   }
 
   registerUser(): void {
@@ -94,7 +102,7 @@ export class CreateItemsComponent implements OnInit {
             this.formRegister.reset();
             this.matDialogRef.close('salvo');
           },
-          error: () => alert('erro ao adicionar produto.'),
+          error: () => this.alertErrorCreate(),
         });
       }
     } else {
@@ -113,7 +121,7 @@ export class CreateItemsComponent implements OnInit {
         this.matDialogRef.close('update');
         // console.log(editUser);
       },
-      error: () => alert('erro ao atualizar produto'),
+      error: () => this.alertRemoveEdit(),
     });
   }
 

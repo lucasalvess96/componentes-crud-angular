@@ -25,5 +25,7 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "typescript.autoClosingTags": true,
+  "typescript.suggest.autoImports": true
 }

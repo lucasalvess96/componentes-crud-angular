@@ -59,7 +59,6 @@ export class TodoService {
         `O back-end retornou código: ${erro.status}, Body era: ${erro.error}`
       );
     }
-
     return throwError(
       () =>
         new Error('Algo ruím aconteceu; por favor, tente novamente mais tarde.')
