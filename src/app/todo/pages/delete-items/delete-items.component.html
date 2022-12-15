@@ -1,0 +1,14 @@
+<h3>Informações do item {{ data.name }}</h3>
+<hr />
+<div>
+  <h1 mat-dialog-title>Deletar {{ data.name }}</h1>
+  <div mat-dialog-content>Confirmar exclusão?</div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="deleteItems(data)">
+      <mat-icon>delete</mat-icon>Sim
+    </button>
+    <button mat-button mat-dialog-close cdkFocusInitial>
+      <mat-icon>close</mat-icon> Não
+    </button>
+  </div>
+</div>

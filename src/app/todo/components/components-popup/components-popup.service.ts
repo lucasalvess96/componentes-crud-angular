@@ -62,20 +62,20 @@ export class ComponentsPopupService {
       });
   }
 
-  dialogDeleteItems(item: Items): void {
-    this.items = this.items.filter((id: Items) => id !== item);
-    this.confirmService.showConfirm(
-      'Deseja confirmar exlusão ?',
-      () => {
-        this.todoService.deleteItems(item).subscribe({
-          next: () => {
-            this.cmponentsAlertsService.alertSuccess();
-            // this.listItemsComponent.onListItems();
-          },
-          error: () => this.cmponentsAlertsService.alertErrorDeleteUser(),
-        });
-      },
-      () => {}
-    );
-  }
+  // dialogDeleteItems(item: Items): void {
+  //   this.items = this.items.filter((id: Items) => id !== item);
+  //   this.confirmService.showConfirm(
+  //     'Deseja confirmar exlusão ?',
+  //     () => {
+  //       this.todoService.deleteItems(item).subscribe({
+  //         next: () => {
+  //           this.cmponentsAlertsService.alertSuccess();
+  //           // this.listItemsComponent.onListItems();
+  //         },
+  //         error: () => this.cmponentsAlertsService.alertErrorDeleteUser(),
+  //       });
+  //     },
+  //     () => {}
+  //   );
+  // }
 }

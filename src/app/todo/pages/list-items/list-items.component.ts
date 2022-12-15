@@ -3,12 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { NgConfirmService } from 'ng-confirm-box';
-import { ComponentsPopupService } from '../../components/components-popup/components-popup.service';
 import { ComponentsAlertsService } from '../../components/messages/messages-alert/components-alerts.service';
 import { Items } from '../../models/items';
 import { TodoService } from '../../service/todo.service';
 import { CreateItemsComponent } from '../create-items/create-items.component';
+import { DeleteItemsComponent } from '../delete-items/delete-items.component';
 import { DetailItemsComponent } from '../detail-items/detail-items.component';
 
 @Component({
@@ -28,9 +27,7 @@ export class ListItemsComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private todoService: TodoService,
-    private confirmService: NgConfirmService,
-    private componentsAlertsService: ComponentsAlertsService,
-    private componentsPopupService: ComponentsPopupService
+    private componentsAlertsService: ComponentsAlertsService
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +46,6 @@ export class ListItemsComponent implements OnInit {
     });
   }
 
-  // https://www.youtube.com/watch?v=3tD6fKdxom0 -> pop delet
   onCreateItem(): void {
     this.dialog
       .open(CreateItemsComponent, {
@@ -92,20 +88,17 @@ export class ListItemsComponent implements OnInit {
   }
 
   onDeleteItems(item: Items): void {
-    this.items = this.items.filter((id: Items) => id !== item);
-    this.confirmService.showConfirm(
-      'Deseja confirmar exlusão ?',
-      () => {
-        this.todoService.deleteItems(item).subscribe({
-          next: () => {
-            this.componentsAlertsService.alertSuccess();
-            this.onListItems();
-          },
-          error: () => this.componentsAlertsService.alertErrorDeleteUser(),
-        });
-      },
-      () => {}
-    );
+    this.dialog
+      .open(DeleteItemsComponent, {
+        width: '35%',
+        data: item,
+      })
+      .afterClosed()
+      .subscribe(val => {
+        if (val === 'delete') {
+          this.onListItems();
+        }
+      });
   }
 
   applyFilter(event: Event): void {

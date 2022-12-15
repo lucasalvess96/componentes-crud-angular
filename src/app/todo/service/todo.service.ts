@@ -19,19 +19,19 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class TodoService {
-  private baseURL: string = `${environment.apiBaseUrl}/items`;
+  private baseUrl: string = `${environment.apiBaseUrl}/items`;
 
   constructor(private http: HttpClient) {}
 
   listItems(): Observable<Items[]> {
     return this.http
-      .get<Items[]>(this.baseURL)
+      .get<Items[]>(this.baseUrl)
       .pipe(retry(2), catchError(this.configErroApi));
   }
 
   addItems(items: Items): Observable<Items> {
     return this.http
-      .post<Items>(this.baseURL, items, httpOptions)
+      .post<Items>(this.baseUrl, items, httpOptions)
       .pipe(catchError(this.configErroApi));
   }
 
@@ -42,12 +42,12 @@ export class TodoService {
     );
 
     return this.http
-      .put<Items>(`${this.baseURL}/${item.id}`, item, httpOptions)
+      .put<Items>(`${this.baseUrl}/${item.id}`, item, httpOptions)
       .pipe(catchError(this.configErroApi));
   }
 
-  deleteItems(item: Items): Observable<unknown> {
-    const url: string = `${this.baseURL}/${item.id}`;
+  deleteItems(item: number): Observable<unknown> {
+    const url: string = `${this.baseUrl}/${item}`;
     return this.http.delete(url).pipe(catchError(this.configErroApi));
   }
 

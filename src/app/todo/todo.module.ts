@@ -15,6 +15,7 @@ import { CreateItemsComponent } from './pages/create-items/create-items.componen
 import { DetailItemsComponent } from './pages/detail-items/detail-items.component';
 import { ListItemsComponent } from './pages/list-items/list-items.component';
 import { TodoRoutingModule } from './todo-routing.module';
+import { DeleteItemsComponent } from './pages/delete-items/delete-items.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TodoRoutingModule } from './todo-routing.module';
     ComponentPopupComponent,
     MessagesAlertComponent,
     CepComponent,
+    DeleteItemsComponent,
   ],
   imports: [
     CommonModule,
